@@ -1,1 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Databases Narrative | Brandon J. Armitage</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #161b22;
+      padding: 30px 10%;
+      border-bottom: 1px solid #30363d;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    article {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 35px;
+    }
+
+    h1, h2 {
+      color: #58a6ff;
+    }
+
+    a {
+      color: #f2cc60;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Databases</h1>
+  <a href="index.html">← Back to ePortfolio</a>
+</header>
+
+<main>
+  <article>
+    <h2>Travlr Getaways Database Enhancement Narrative</h2>
+
+    <p>The artifact I selected is the Travlr Getaways application from CS 465. It stores travel packages in MongoDB and uses Mongoose and an Express API to work with the trip data.</p>
+
+    <p>I chose Travlr for this enhancement because there were several ways I could improve how the application stored, searched, and protected its data.</p>
+
+    <p>I started by adding unique trip codes, timestamps, sorting, pagination, filtering, and a start-date index. I also updated the controller so bad requests were handled more clearly.</p>
+
+    <p>While testing the date filter, I found that some older trip dates were stored as text instead of real dates. I checked the records and created a small script to convert the older values. After that, the date filter worked correctly.</p>
+
+    <p>I also found a problem with duplicate trip codes. Even though the schema marked the code as unique, MongoDB was still using an older non-unique index. I created a script to remove the old index and rebuild it correctly. After the fix, duplicate trip codes returned a 409 Conflict instead of being added to the database.</p>
+
+    <p>I added an aggregation endpoint that groups trips by resort and returns the number of trips and earliest start date for each resort. I also added audit logging for CREATE, UPDATE, and DELETE actions. Each audit record stores the trip ID, trip code, action, and timestamps.</p>
+
+    <p>I tested the database changes with Postman and checked MongoDB directly to make sure the data and audit records were being saved correctly.</p>
+
+    <p>This enhancement gave me more experience with MongoDB, Mongoose, indexes, migrations, filtering, aggregation, API testing, and data validation. It also supports the course outcomes involving evaluating computing solutions, using established development tools, and protecting data.</p>
+
+    <p>The biggest problems I ran into came from existing data and database indexes rather than the code itself. Fixing those problems gave me more experience checking the actual database instead of assuming a code change automatically changed existing stored data.</p>
+
+    <h2>AI Use Acknowledgment</h2>
+    <p>I used ChatGPT to assist at reminding the uses functions and variables, and troubleshoot some problems that came up during testing.</p>
+  </article>
+</main>
+
+</body>
+</html>
