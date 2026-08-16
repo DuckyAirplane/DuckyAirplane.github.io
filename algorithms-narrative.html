@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithms Narrative | Brandon J. Armitage</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #161b22;
+      padding: 30px 10%;
+      border-bottom: 1px solid #30363d;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    article {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 35px;
+    }
+
+    h1, h2 {
+      color: #58a6ff;
+    }
+
+    a {
+      color: #f2cc60;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Algorithms and Data Structures</h1>
+  <a href="index.html">← Back to ePortfolio</a>
+</header>
+
+<main>
+  <article>
+    <h2>Deep Q-Learning Maze Agent Enhancement Narrative</h2>
+
+    <p>The artifact I selected is a deep Q-learning maze agent that I created in CS 370. The program uses a two-dimensional NumPy matrix for the maze, and the pirate agent learns how to reach the treasure by moving left, right, up, or down.</p>
+
+    <p>I chose this project because it uses algorithms, data structures, machine learning, and problem-solving together. The maze is stored as a matrix, visited locations are tracked with a set, and previous attempts are stored in replay memory so the agent can learn from earlier actions.</p>
+
+    <p>The original project only trained the agent on one 6-by-6 maze. I expanded it to five different 11-by-11 mazes. At the beginning of each training attempt, one of the five mazes is selected and stays the same until that attempt ends.</p>
+
+    <p>I also added a live display that shows the maze, epoch, move count, and current game status. The display can be turned on or off while training by changing the show_attempts.txt file. This made it easier to watch what the agent was doing without restarting the training process.</p>
+
+    <p>I also fixed part of the replay logic. Win and lose states now correctly end an attempt, while the not_over state continues calculating future rewards. This helped keep the training behavior consistent.</p>
+
+    <p>One challenge was making sure all five mazes were solvable. I also had to find a way to control the live display while the training loop was already running. Using a text file gave me a simple way to turn the display on or off without stopping the program.</p>
+
+    <p>This enhancement supports the course outcome involving designing and evaluating computing solutions using algorithmic principles. It also gave me more experience with state representation, replay memory, testing, and deep Q-learning.</p>
+
+    <p>The enhanced version gives the agent a larger and more varied environment to train in and makes its behavior easier to inspect while it is running.</p>
+
+    <h2>AI Use Acknowledgment</h2>
+    <p>I used ChatGPT to help as a reminder to some of the functions and variables being used.</p>
+  </article>
+</main>
+
+</body>
+</html>
