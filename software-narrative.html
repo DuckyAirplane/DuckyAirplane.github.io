@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Engineering Narrative | Brandon J. Armitage</title>
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      line-height: 1.7;
+    }
+
+    header {
+      background: #161b22;
+      padding: 30px 10%;
+      border-bottom: 1px solid #30363d;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    article {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 35px;
+    }
+
+    h1, h2 {
+      color: #58a6ff;
+    }
+
+    a {
+      color: #f2cc60;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Software Design and Engineering</h1>
+  <a href="index.html">← Back to ePortfolio</a>
+</header>
+
+<main>
+  <article>
+    <h2>Travlr Getaways Enhancement Narrative</h2>
+
+    <p>The artifact I selected is the Travlr travel application that I created during CS 465 Full Stack Development. It uses Node.js and Express for the server, MongoDB and Mongoose for data storage, and Angular for the administrative side. Travlr also includes a public travel website, an API for managing trip records, and authentication for protected changes.</p>
+
+    <p>I chose Travlr for my ePortfolio since it demonstrates several parts of a full-stack application working together. The project includes a user interface, backend server, database access, API routes, and authentication. The original application worked, but reviewing the code revealed areas where validation, error handling, and security needed improvement.</p>
+
+    <p>The first enhancement was made to the trip model in app_api/models/travlr.js. The original model mainly used required: true, which did not prevent blank spaces, excessive text, or invalid dates. I created a reusable validator that trims extra spaces and rejects blank values. I also added character limits to the text fields and validation for the trip start date. Reusing the validator reduced repeated code and made the schema easier to maintain.</p>
+
+    <p>The second enhancement improved error handling in app_api/controllers/trips.js. The original controller sometimes returned raw database errors, which could confuse users and expose internal details. I added reusable functions for validation failures, malformed trip IDs, and unexpected server errors. Invalid requests now return a 400 response, missing records return a 404 response, and unexpected problems return a general 500 message.</p>
+
+    <p>I added runValidators as well: true to the update function so edited trips follow the same rules as new records. I tested the enhancement by creating a temporary account and using its JWT to submit invalid trip data. The API returned a 400 response with a separate message for each invalid field, confirming that the model validation and error handling worked properly.</p>
+
+    <p>The third enhancement addressed JWT security. The original code used MY_SECRET as a fallback when an environment secret was missing. Since that value was written directly into the source code, anyone viewing the project could discover it. I installed dotenv and created a protected .env file containing a randomly generated secret. The .env file is ignored by Git, so the secret is not included with the public code. The application now requires JWT_SECRET when creating or verifying a token.</p>
+
+    <p>I also updated the authentication middleware to require the correct Bearer &lt;token&gt; format. Missing or malformed headers return a 401 response. Expired tokens receive an expiration message, and invalid tokens receive a general authentication message. I tested the middleware with an incorrectly formatted header, and the server returned the expected 401 Unauthorized response.</p>
+
+    <p>The enhancement met Course Outcomes 3 and 4 from my Module One plan. I evaluated an existing application and made design choices that improved reliability without rebuilding the entire project. The reusable validation and error-handling functions also demonstrate software engineering practices that make code easier to test and maintain.</p>
+
+    <p>The security changes also gave me stronger coverage of Course Outcome 5. Removing the predictable fallback secret and requiring a protected environment reduced a security risk. The updated middleware also handles missing, malformed, expired, and invalid tokens more safely.</p>
+
+    <p>Another design choice I made was to leave per Person stored as text. Converting it to a number could improve price validation, but it could also affect existing database records and the Angular forms that display the value. I kept the current format to avoid breaking other parts of the application. It remains an area for future improvement.</p>
+
+    <p>The enhancement process taught me that a program can run correctly and still contain weaknesses. Travlr already displayed trip data, but the review made me examine what happened when the application received bad input or invalid authentication information. I learned that validation must apply during updates as well as record creation. I also learned that error messages should help users without exposing database details.</p>
+
+    <p>Testing the protected routes was one of the main challenges. I needed a valid account and token before reaching the trip validation code. I created a temporary account and saved its token for the request. During the security test, the first request reached an older version of the running server and returned the previous response. Restarting the server loaded the latest code and produced the expected 401 result. That experience reinforced the need to confirm that the newest version is running before judging whether a change worked.</p>
+
+    <p>Travlr is now more reliable and secure than the original version. Invalid trip data is rejected before reaching the database, API errors are easier to understand, updates follow the schema rules, and JWT authentication relies on a private environment secret. These improvements better represent the software development skills I want to include in my ePortfolio.</p>
+
+    <h2>AI Use Acknowledgment</h2>
+    <p>Generative AI was used to assist with identifying specific blocks of code, as well as helping me keep track of changes to allow a more organized narrative.</p>
+  </article>
+</main>
+
+</body>
+</html>
